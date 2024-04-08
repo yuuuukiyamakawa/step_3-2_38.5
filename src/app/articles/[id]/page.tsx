@@ -1,4 +1,4 @@
-import { getDetailArticle } from '@/blogAPI';
+import { getDetailArticle } from '@/API';
 import Image from 'next/image';
 import React from 'react'
 

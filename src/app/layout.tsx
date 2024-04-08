@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className='container mx-auto bg-slate-700 text-slate-50'>
+      <body className='container mx-auto bg-[#44AFFF] text-slate-50'>
         <Header />
         <Suspense fallback={<Loading />}>{children}</Suspense>
         <Footer />
