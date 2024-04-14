@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { User } from '@/types'; // User型をインポート
 import LikeConfirm from './LikeConfirm';
 
-// UserDetailPropsに直接User型を含める
+// UserDetailPropsにUser型を含める
 type UserDetailProps = {
-  user: {
-    ID: number;
-    Name: string;
-    Login_icon_color: string;
-    // その他のプロパティがあればここに追加します。
-  };
+  user: User;
   onClose: () => void;
 };
 
@@ -38,8 +34,7 @@ const UserDetail: React.FC<UserDetailProps> = ({ user, onClose }) => {
       <h3 className="text-center text-xl font-bold">{user.Name}</h3>
       <div className="flex justify-center my-4">
         <Image
-            // src={`/icon/${user.Login_icon_color}`} // user.image_idに後程修正
-            src="/icon/img1.png"
+            src={`/icon/img${user.Occupation_image}.png`} // 正しい画像パスを設定
             alt={user.Name}
             width={100}
             height={100}
@@ -55,9 +50,11 @@ const UserDetail: React.FC<UserDetailProps> = ({ user, onClose }) => {
       </div>
       {showLikePopup && (
         <LikeConfirm
+          user={user} // LikeConfirmにuserプロパティを渡す
           onSendLike={handleSendLike}
           onSendLikeWithMessage={handleSendLikeWithMessage}
-          onClose={() => setShowLikePopup(false)} />
+          onClose={() => setShowLikePopup(false)}
+        />
       )}
     </div>
   );

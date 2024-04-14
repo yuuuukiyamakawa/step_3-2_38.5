@@ -1,45 +1,21 @@
-// クライアントサイドでの実行を指定
 'use client';
 
-// 必要なモジュールとコンポーネントをインポート
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import UserDetail from './UserDetail'; // UserDetailコンポーネントをインポート
-import fetchCustomers from '@/fetchCustomer'; // fetchCustomers関数をインポート
+import { User } from '../../../../types/userTypes'; // User型をインポート
+import UserDetail from './UserDetail';
 
-// User型の定義（APIからのレスポンスに合わせて修正）
-type User = {
-  ID: number;
-  Name: string;
-  X_grid: number;
-  Y_grid: number;
-  Login_icon_color: string;
-  Occupation_image: number;
+// MappingProps型の定義
+type MappingProps = {
+  users: User[]; // User型の配列を受け取る
 };
 
 // Mappingコンポーネントの定義
-const Mapping: React.FC = () => {
+const Mapping: React.FC<MappingProps> = ({ users }) => {
   // SVG要素を参照するためのrefオブジェクト
   const d3Container = useRef(null);
-  // ユーザーのリストを状態として持つ（初期値は空配列）
-  const [users, setUsers] = useState<User[]>([]);
   // 選択されたユーザーを状態として持つ
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-
-  // コンポーネントがマウントされた後に一度だけ実行されるEffect
-  useEffect(() => {
-    // データをフェッチして状態にセットする非同期関数
-    const fetchAndSetUsers = async () => {
-      try {
-        const fetchedUsers = await fetchCustomers();
-        setUsers(fetchedUsers); // 取得したユーザーデータを状態にセット
-      } catch (error) {
-        console.error('データの取得に失敗しました:', error);
-      }
-    };
-
-    fetchAndSetUsers();
-  }, []);
 
   // コンポーネントがマウントされた後に一度だけ実行されるEffect
   useEffect(() => {
@@ -116,10 +92,9 @@ const Mapping: React.FC = () => {
   return (
     <div>
       <svg ref={d3Container}></svg>
-      {selectedUser && <UserDetail user={selectedUser} onClose={() => setSelectedUser(null)} />} {/* 選択されたユーザーの詳細を表示 */}
+      {selectedUser && <UserDetail user={selectedUser} onClose={() => setSelectedUser(null)} />}
     </div>
   );
 };
 
-// コンポーネントをエクスポート
 export default Mapping;

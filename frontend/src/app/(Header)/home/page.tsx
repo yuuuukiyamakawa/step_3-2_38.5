@@ -1,5 +1,3 @@
-// frontend>src>app>(Header)>home>page.tsx
-
 import Mapping from "./components/Mapping";
 import fetchCustomers from "@/fetchCustomer"; // getAllUsersの代わりにfetchCustomersをインポート
 
