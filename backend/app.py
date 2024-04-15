@@ -11,8 +11,16 @@ CORS(app)
 def index():
     return "<p>Flask top page!</p>"
 
-@app.route("/allusers", methods=['GET'])
+@app.route("/mapping", methods=['GET'])
 def read_all_users():
-    model = dbmodels.Users
-    result = crud.selectAll(dbmodels.Users)
+    model = [
+        dbmodels.User,
+        dbmodels.Occupation,
+        dbmodels.User_grid,
+        dbmodels.Want_grid,
+        ]
+    result = crud.select_for_mapping(model)
     return result, 200
+
+# @app.route('/login', methods=['POST'])
+# def login():
