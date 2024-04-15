@@ -8,15 +8,18 @@ import json
 import pandas as pd
 
 from db_control.connect import engine
-from db_control.dbmodels import Users
+from db_control.dbmodels import User
 
 
-def selectAll(dbmodel):
+def select_for_mapping(dbmodel):
     # session構築
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    query = select(dbmodel)
+    query = select(* dbmodel)
+    query = query.join(dbmodel[1])
+    query = query.join(dbmodel[2])
+    query = query.join(dbmodel[3])
 
     try:
     # トランザクションを開始
