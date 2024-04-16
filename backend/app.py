@@ -17,7 +17,7 @@ def read_all_users():
         dbmodels.User,
         dbmodels.Occupation,
         dbmodels.User_grid,
-        dbmodels.Want_grid,
+        dbmodels.Island_grid,
         ]
     result = crud.select_for_mapping(model)
     return result, 200
