@@ -33,21 +33,21 @@ class Occupation(Base):
 class User_grid(Base):
     __tablename__ = 'user_grid'
     id: Mapped[int] = mapped_column(primary_key=True)
-    x_grid: Mapped[float] = mapped_column()
-    y_grid: Mapped[float] = mapped_column()
-    want_grid_id: Mapped[int] = mapped_column(ForeignKey("want_grid.id"))
+    user_x_grid: Mapped[float] = mapped_column()
+    user_y_grid: Mapped[float] = mapped_column()
+    island_grid_id: Mapped[int] = mapped_column(ForeignKey("island_grid.id"))
 
     user: Mapped['User'] = relationship(backref='grid')
-    # want_grid: Mapped['Wnat_grid'] = relationship(back_populates='user_grid')
+    # island_grid: Mapped['Island_grid'] = relationship(back_populates='user_grid')
 
-class Want_grid(Base):
-    __tablename__ = 'want_grid'
+class Island_grid(Base):
+    __tablename__ = 'island_grid'
     id: Mapped[int] = mapped_column(primary_key=True)
     island_name: Mapped[str] = mapped_column()
-    x_grid: Mapped[float] = mapped_column()
-    y_grid: Mapped[float] = mapped_column()
+    island_x_grid: Mapped[float] = mapped_column()
+    island_y_grid: Mapped[float] = mapped_column()
 
-    user_grid: Mapped['User_grid'] = relationship(backref='want_grid')
+    user_grid: Mapped['User_grid'] = relationship(backref='island_grid')
 
 
 

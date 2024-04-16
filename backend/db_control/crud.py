@@ -17,9 +17,10 @@ def select_for_mapping(dbmodel):
     session = Session()
 
     query = select(* dbmodel)
-    query = query.join(dbmodel[1])
-    query = query.join(dbmodel[2])
-    query = query.join(dbmodel[3])
+    query = query.join(dbmodel[1], isouter=True)
+    query = query.join(dbmodel[2], isouter=True)
+    query = query.join(dbmodel[3], isouter=True)  
+    # isouter=Trueでleftjoin
 
     try:
     # トランザクションを開始
