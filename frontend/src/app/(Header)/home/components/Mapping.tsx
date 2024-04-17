@@ -62,8 +62,8 @@ const Mapping: React.FC<MappingProps> = ({ users }) => {
       // ユーザーのデータを基に、円とテキストをSVGに追加
       users.forEach(user => {
         view.append('circle')
-            .attr('cx', scale(user.x_grid))
-            .attr('cy', scale(user.y_grid))
+            .attr('cx', scale(user.user_x_grid))
+            .attr('cy', scale(user.user_y_grid))
             .attr('r', 20)
             .attr('fill', `url(#image-${user.id})`) // パターンを塗りつぶしに使用
             .attr('stroke', "#0000ff") // 枠線の色を設定
@@ -71,8 +71,8 @@ const Mapping: React.FC<MappingProps> = ({ users }) => {
             .on('click', () => setSelectedUser(user)); // クリックイベントを設定
 
         view.append('text')
-            .attr('x', scale(user.x_grid))
-            .attr('y', scale(user.y_grid))
+            .attr('x', scale(user.user_x_grid))
+            .attr('y', scale(user.user_y_grid))
             .attr('dy', '1em') // テキストの位置調整
             .style('text-anchor', 'middle')
             .style('fill', 'white')

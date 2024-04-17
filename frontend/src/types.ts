@@ -14,11 +14,11 @@ export type User = {
     occupation_name: string;
     occupation_attributes_id: number;
     id_2: number;
-    x_grid: number;
-    y_grid: number;
-    want_grid_id: number;
+    user_x_grid: number;
+    user_y_grid: number;
+    island_grid_id: number;
     id_3: number;
     island_name: string;
-    x_grid_1: number;
-    y_grid_1: number;
+    island_x_grid: number;
+    island_y_grid: number;
   };
