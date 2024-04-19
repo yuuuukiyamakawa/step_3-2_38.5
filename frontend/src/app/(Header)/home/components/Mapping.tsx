@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import { User } from '../../../../types/userTypes'; // User型をインポート
+import { User } from '@/types'; // User型をインポート
 import UserDetail from './UserDetail';
 
 // MappingProps型の定義
@@ -30,7 +30,7 @@ const Mapping: React.FC<MappingProps> = ({ users }) => {
       const defs = svg.append("defs");
       users.forEach(user => {
         defs.append("pattern")
-          .attr("id", `image-${user.ID}`) // パターンにIDを設定
+          .attr("id", `image-${user.id}`) // パターンにIDを設定
           .attr("height", "100%")
           .attr("width", "100%")
           .attr("patternContentUnits", "objectBoundingBox")
@@ -38,7 +38,7 @@ const Mapping: React.FC<MappingProps> = ({ users }) => {
           .attr("height", 1)
           .attr("width", 1)
           .attr("preserveAspectRatio", "none")
-          .attr("href", `/icon/img${user.Occupation_image}.png`); // 画像のパスを設定
+          .attr("href", `/icon/${user.career}.png`); // 画像のパスを設定
       });
 
       // SVGの幅と高さを定義
@@ -62,23 +62,23 @@ const Mapping: React.FC<MappingProps> = ({ users }) => {
       // ユーザーのデータを基に、円とテキストをSVGに追加
       users.forEach(user => {
         view.append('circle')
-            .attr('cx', scale(user.X_grid))
-            .attr('cy', scale(user.Y_grid))
+            .attr('cx', scale(user.user_x_grid))
+            .attr('cy', scale(user.user_y_grid))
             .attr('r', 20)
-            .attr('fill', `url(#image-${user.ID})`) // パターンを塗りつぶしに使用
-            .attr('stroke', user.Login_icon_color) // 枠線の色を設定
+            .attr('fill', `url(#image-${user.id})`) // パターンを塗りつぶしに使用
+            .attr('stroke', "#0000ff") // 枠線の色を設定
             .attr('stroke-width', 3) // 枠線の幅を設定
             .on('click', () => setSelectedUser(user)); // クリックイベントを設定
 
         view.append('text')
-            .attr('x', scale(user.X_grid))
-            .attr('y', scale(user.Y_grid))
+            .attr('x', scale(user.user_x_grid))
+            .attr('y', scale(user.user_y_grid))
             .attr('dy', '1em') // テキストの位置調整
             .style('text-anchor', 'middle')
             .style('fill', 'white')
             .style('font-family', 'sans-serif')
             .style('font-size', '10px')
-            .text(user.Name); // ユーザー名を表示
+            .text(user.user_name); // ユーザー名を表示
       });
 
       // ズームイベント時にビューを更新する関数
