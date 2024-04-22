@@ -19,9 +19,15 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className='container mx-auto bg-[#44AFFF] text-slate-50'>
-        <Header />
-        <Suspense>{children}</Suspense>
-        <Footer />
+        <div>
+          <Header />
+        </div>
+        <div className="pb-10"> {/* フッターの高さ以上の値に調整 */}
+          <Suspense>{children}</Suspense>
+        </div>
+        <div>
+          <Footer />
+        </div>
       </body>
     </html>
   );

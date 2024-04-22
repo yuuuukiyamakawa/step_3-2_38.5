@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+const { withIcons } = require('@iconify/tailwind');
 
 const config: Config = {
   content: [

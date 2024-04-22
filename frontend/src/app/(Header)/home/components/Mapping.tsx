@@ -38,7 +38,7 @@ const Mapping: React.FC<MappingProps> = ({ users }) => {
           .attr("height", 1)
           .attr("width", 1)
           .attr("preserveAspectRatio", "none")
-          .attr("href", `/icon/${user.career}.png`); // 画像のパスを設定
+          .attr("href", `/icon/${user.occupation_attributes_image}`); // 画像のパスを設定
       });
 
       // SVGの幅と高さを定義
@@ -64,16 +64,16 @@ const Mapping: React.FC<MappingProps> = ({ users }) => {
         view.append('circle')
             .attr('cx', scale(user.user_x_grid))
             .attr('cy', scale(user.user_y_grid))
-            .attr('r', 20)
+            .attr('r', 25)
             .attr('fill', `url(#image-${user.id})`) // パターンを塗りつぶしに使用
-            .attr('stroke', "#0000ff") // 枠線の色を設定
+            .attr('stroke', `${user.status_color}`) // 枠線の色を設定
             .attr('stroke-width', 3) // 枠線の幅を設定
             .on('click', () => setSelectedUser(user)); // クリックイベントを設定
 
         view.append('text')
             .attr('x', scale(user.user_x_grid))
             .attr('y', scale(user.user_y_grid))
-            .attr('dy', '1em') // テキストの位置調整
+            .attr('dy', '3.2em') // テキストの位置調整
             .style('text-anchor', 'middle')
             .style('fill', 'white')
             .style('font-family', 'sans-serif')
@@ -91,7 +91,7 @@ const Mapping: React.FC<MappingProps> = ({ users }) => {
   // コンポーネントがレンダリングする内容
   return (
     <div>
-      <svg ref={d3Container}></svg>
+      <svg className='px-3' ref={d3Container}></svg>
       {selectedUser && <UserDetail user={selectedUser} onClose={() => setSelectedUser(null)} />}
     </div>
   );

@@ -1,5 +1,5 @@
 import Mapping from "./components/Mapping";
-import fetchCustomers from "@/fetchCustomer"; // getAllUsersの代わりにfetchCustomersをインポート
+import {fetchCustomers} from "@/fetchCustomer";
 
 export default async function Home() {
   const users = await fetchCustomers(); // fetchCustomersを使用
@@ -7,7 +7,7 @@ export default async function Home() {
 
   return (
     <div className='md:flex'>
-      <section className='w-full flex-col items-center px-3'>
+      <section className='w-full flex-col items-center'>
         <Mapping users={users} />
       </section>
     </div>
